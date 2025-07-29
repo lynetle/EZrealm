@@ -4,8 +4,8 @@
 # 全局配置
 # ========================================
 CURRENT_VERSION="1.1.1"
-UPDATE_URL="https://raw.githubusercontent.com/qqrrooty/EZrealm/main/realm.sh"
-VERSION_CHECK_URL="https://raw.githubusercontent.com/qqrrooty/EZrealm/main/version.txt"
+UPDATE_URL="https://github.nakkle.com/https://raw.githubusercontent.com/qqrrooty/EZrealm/main/realm.sh"
+VERSION_CHECK_URL="https://github.nakkle.com/https://raw.githubusercontent.com/qqrrooty/EZrealm/main/version.txt"
 REALM_DIR="/root/realm"
 CONFIG_FILE="$REALM_DIR/config.toml"
 SERVICE_FILE="/etc/systemd/system/realm.service"
@@ -168,7 +168,7 @@ deploy_realm() {
 
     # 获取最新版本号
     echo -e "${BLUE}▶ 正在检测最新版本...${NC}"
-    LATEST_VERSION=$(curl -sL https://github.com/zhboner/realm/releases | grep -oE '/zhboner/realm/releases/tag/v[0-9]+\.[0-9]+\.[0-9]+' | head -n1 | cut -d'/' -f6 | tr -d 'v')
+    LATEST_VERSION=$(curl -sL https://github.nakkle.com/https://github.com/zhboner/realm/releases | grep -oE '/zhboner/realm/releases/tag/v[0-9]+\.[0-9]+\.[0-9]+' | head -n1 | cut -d'/' -f6 | tr -d 'v')
     
     # 版本号验证
     if [[ -z "$LATEST_VERSION" || ! "$LATEST_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
@@ -180,7 +180,7 @@ deploy_realm() {
     fi
 
     # 下载最新版本
-    DOWNLOAD_URL="https://github.com/zhboner/realm/releases/download/v${LATEST_VERSION}/realm-x86_64-unknown-linux-gnu.tar.gz"
+    DOWNLOAD_URL="https://github.nakkle.com/https://github.com/zhboner/realm/releases/download/v${LATEST_VERSION}/realm-x86_64-unknown-linux-gnu.tar.gz"
     echo -e "${BLUE}▶ 正在下载 Realm v${LATEST_VERSION}...${NC}"
     if ! wget --show-progress -qO realm.tar.gz "$DOWNLOAD_URL"; then
         log "安装失败：下载错误"
@@ -539,8 +539,8 @@ main_menu() {
         echo -e "    仓库：https://github.com/qqrrooty/EZrealm"
         echo -e "    2025/4/1 更新：有人反馈该新版本添加规则过多后无法启动，如果遇到问题，可以尝试回退老版本（大概率是备注问题）"
         echo -e "        删除该脚本 rm realm.sh"
-        echo -e "        运行 wget -N https://raw.githubusercontent.com/qqrrooty/EZrealm/main/realm-2024.sh && chmod +x realm.sh && ./realm.sh"
-        echo -e "        或者 wget -N https://raw.githubusercontent.com/qqrrooty/EZrealm/main/realm-2025.sh && chmod +x realm.sh && ./realm.sh${NC}"
+        echo -e "        运行 wget -N https://github.nakkle.com/https://raw.githubusercontent.com/qqrrooty/EZrealm/main/realm-2024.sh && chmod +x realm.sh && ./realm.sh"
+        echo -e "        或者 wget -N https://github.nakkle.com/https://raw.githubusercontent.com/qqrrooty/EZrealm/main/realm-2025.sh && chmod +x realm.sh && ./realm.sh${NC}"
         echo -e "${YELLOW}▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂${NC}"
         echo -e "  "
         echo -e "${YELLOW}服务状态：$(service_control status)${NC}"
