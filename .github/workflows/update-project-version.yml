@@ -1,7 +1,7 @@
 name: 检查目标项目版本更新
 on:
   schedule:
-    - cron: "0 * * * *" # 每小时检查一次
+    - cron: "0 1 * * *" # 每小时检查一次
   workflow_dispatch: # 允许手动触发
 
 jobs:
@@ -21,7 +21,7 @@ jobs:
 
       - name: 运行检测脚本
         env:
-          TARGET_REPO: other-user/other-repo # 替换为你要监控的仓库
+          TARGET_REPO: zhboner/realm # 替换为你要监控的仓库
         run: node checkVersion.js
 
       - name: 提交并推送更新
