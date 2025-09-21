@@ -1,8 +1,8 @@
 const fs = require('fs');
 const fetch = require('node-fetch');
 
-const repo = process.env.TARGET_REPO || 'other-user/other-repo'; // 目标仓库
-const filePath = 'your-text.txt'; // 存储版本号的文本
+const repo = process.env.TARGET_REPO || 'zhboner/realm'; // 目标仓库
+const filePath = 'realm-v.txt'; // 存储版本号的文本
 
 async function main() {
   const res = await fetch(`https://api.github.com/repos/${repo}/releases/latest`);
