@@ -1,0 +1,12 @@
+{
+  "name": "version-watcher",
+  "version": "1.0.0",
+  "description": "自动检测其他项目版本变动并更新文本",
+  "main": "checkVersion.js",
+  "scripts": {
+    "start": "node checkVersion.js"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.12"
+  }
+}
