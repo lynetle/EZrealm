@@ -4,8 +4,8 @@
 # 全局配置
 # ========================================
 CURRENT_VERSION="1.1.1"
-UPDATE_URL="https://github.makkle.com/https://raw.githubusercontent.com/qqrrooty/EZrealm/main/realm.sh"
-VERSION_CHECK_URL="https://github.makkle.com/https://raw.githubusercontent.com/qqrrooty/EZrealm/main/version.txt"
+UPDATE_URL="https://github.makkle.com/https://raw.githubusercontent.com//lynetle/main/realm.sh"
+VERSION_CHECK_URL="https://github.makkle.com/https://raw.githubusercontent.com/lynetle/EZrealm/main/version.txt"
 REALM_DIR="/root/realm"
 CONFIG_FILE="$REALM_DIR/config.toml"
 SERVICE_FILE="/etc/systemd/system/realm.service"
