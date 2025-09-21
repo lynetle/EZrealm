@@ -168,7 +168,7 @@ deploy_realm() {
 
     # 获取最新版本号
     echo -e "${BLUE}▶ 正在检测最新版本...${NC}"
-    LATEST_VERSION=$(curl -sL https://github.makkle.com/https://github.com/zhboner/realm/releases | grep -oE '/zhboner/realm/releases/tag/v[0-9]+\.[0-9]+\.[0-9]+' | head -n1 | cut -d'/' -f6 | tr -d 'v')
+    LATEST_VERSION=$(curl -s https://github.makkle.com/https://raw.githubusercontent.com/lynetle/EZrealm/main/realm-v.txt | tr -d 'v')
     
     # 版本号验证
     if [[ -z "$LATEST_VERSION" || ! "$LATEST_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
