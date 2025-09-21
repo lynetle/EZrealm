@@ -1,7 +1,7 @@
-name: 检查目标项目版本更新
+name: 检查realm版本更新
 on:
   schedule:
-    - cron: "0 1 * * *" # 每小时检查一次
+    - cron: "0 1 * * *" # 每天1点检查一次
   workflow_dispatch: # 允许手动触发
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
           node-version: 20
 
       - name: 安装依赖
-        run: npm ci
+        run: npm install
 
       - name: 运行检测脚本
         env:
