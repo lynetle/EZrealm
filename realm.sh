@@ -171,7 +171,7 @@ deploy_realm() {
     LATEST_VERSION=$(curl -s https://github.makkle.com/https://raw.githubusercontent.com/lynetle/EZrealm/main/realm-v.txt | tr -d 'v')
     
     # 版本号验证
-    if [[ -z "$LATEST_VERSION" || ! "$LATEST_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    if [[ -z "$LATEST_VERSION" ]]; then
         log "版本检测失败，使用备用版本2.7.0"
         LATEST_VERSION="2.7.0"
         echo -e "${YELLOW}⚠ 无法获取最新版本，使用备用版本 v${LATEST_VERSION}${NC}"
@@ -541,6 +541,8 @@ main_menu() {
         echo -e "        删除该脚本 rm realm.sh"
         echo -e "        运行 wget -N https://github.makkle.com/https://raw.githubusercontent.com/qqrrooty/EZrealm/main/realm-2024.sh && chmod +x realm.sh && ./realm.sh"
         echo -e "        或者 wget -N https://github.makkle.com/https://raw.githubusercontent.com/qqrrooty/EZrealm/main/realm-2025.sh && chmod +x realm.sh && ./realm.sh${NC}"
+        echo -e "     修改by：lynetle    修改日期：2025/9/21"
+        echo -e "     修改内容:1.修改realm版本检测方法，大陆用户可以正常获取版本号"
         echo -e "${YELLOW}▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂﹍▂${NC}"
         echo -e "  "
         echo -e "${YELLOW}服务状态：$(service_control status)${NC}"
