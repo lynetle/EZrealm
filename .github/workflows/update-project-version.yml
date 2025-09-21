@@ -29,7 +29,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if [ -n "$(git status --porcelain)" ]; then
-            git add your-text.txt
+            git add realm-v.txt
             git commit -m "自动更新目标项目版本"
             git push
           else
