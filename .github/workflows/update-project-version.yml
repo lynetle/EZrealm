@@ -17,7 +17,7 @@ jobs:
           node-version: 20
 
       - name: 安装依赖
-        run: npm install   # 用 install，不用 ci
+        run: npm install
 
       - name: 运行检测脚本
         env:
@@ -29,13 +29,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # 恢复 package-lock.json，避免因 npm install 改动而失败
-          git restore package-lock.json || true
-
-          if [ -n "$(git status --porcelain)" ]; then
+          # 关键改动：只检查 realm-v.txt 文件是否有变动
+          if [ -n "$(git status --porcelain realm-v.txt)" ]; then
+            echo "发现版本更新，正在提交..."
             git add realm-v.txt
-            git commit -m "自动更新目标项目版本"
+            git commit -m "chore: 自动更新目标项目版本"  # 建议使用更规范的 commit message
             git push
           else
-            echo "无变动，不提交。"
+            echo "无版本更新，不提交。"
           fi
