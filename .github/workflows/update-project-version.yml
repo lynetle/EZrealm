@@ -28,6 +28,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # 恢复 package-lock.json 改动，防止 git 报错
+          git restore package-lock.json
+
           if [ -n "$(git status --porcelain)" ]; then
             git add realm-v.txt
             git commit -m "自动更新目标项目版本"
