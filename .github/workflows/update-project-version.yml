@@ -2,7 +2,7 @@ name: 检查realm版本更新
 on:
   schedule:
     - cron: "0 1 * * *" # 每天1点检查一次
-  workflow_dispatch: # 允许手动触发
+  workflow_dispatch:
 
 jobs:
   check-version:
@@ -17,20 +17,18 @@ jobs:
           node-version: 20
 
       - name: 安装依赖
-        run: npm install
+        run: npm ci  # ✅ 不会改 package-lock.json
 
       - name: 运行检测脚本
         env:
-          TARGET_REPO: zhboner/realm # 替换为你要监控的仓库
+          TARGET_REPO: zhboner/realm
         run: node checkVersion.js
 
       - name: 提交并推送更新
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          # 恢复 package-lock.json 改动，防止 git 报错
-          git restore package-lock.json
+          git restore package-lock.json  # ✅ 避免锁文件改动导致报错
 
           if [ -n "$(git status --porcelain)" ]; then
             git add realm-v.txt
