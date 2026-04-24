@@ -44,3 +44,23 @@ jobs:
           git add realm-v.txt package-lock.json
           git commit -m "chore: update realm version"
           git push
+      - name: 心跳提交（每周一次）
+        run: |
+          if [ "$(date +%u)" -ne 1 ]; then
+            echo "不是周一，不执行心跳"
+            exit 0
+          fi
+
+          echo "$(date)" > .heartbeat
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add .heartbeat
+
+          if git diff --cached --quiet; then
+            echo "没有变化，不提交"
+          else
+            git commit -m "chore: weekly heartbeat"
+            git push
+          fi
