@@ -1,40 +1,46 @@
-name: 检查realm版本更新
+name: 检查 realm 版本更新
+
 on:
   schedule:
-    - cron: "0 1 * * *" # 每天1点检查一次
-  workflow_dispatch: # 允许手动触发
+    - cron: "0 1 * * *" # 每天1点
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   check-version:
     runs-on: ubuntu-latest
+
     steps:
       - name: 检出仓库
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: 设置 Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 24
+          cache: npm
 
       - name: 安装依赖
-        run: npm install
+        run: npm ci
 
       - name: 运行检测脚本
         env:
-          TARGET_REPO: zhboner/realm # 替换为你要监控的仓库
+          TARGET_REPO: zhboner/realm
         run: node checkVersion.js
 
       - name: 提交并推送更新
         run: |
+          if git diff --quiet -- realm-v.txt; then
+            echo "无版本更新，不提交。"
+            exit 0
+          fi
+
+          echo "发现版本更新，正在提交..."
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # 关键改动：只检查 realm-v.txt 文件是否有变动
-          if [ -n "$(git status --porcelain realm-v.txt)" ]; then
-            echo "发现版本更新，正在提交..."
-            git add realm-v.txt
-            git commit -m "chore: 自动更新目标项目版本"  # 建议使用更规范的 commit message
-            git push
-          else
-            echo "无版本更新，不提交。"
-          fi
+          git add realm-v.txt
+          git commit -m "chore: update realm version"
+          git push
